@@ -6,4 +6,11 @@
 ## SavedVariables: ProfessionLlamaDB
 
 ProfessionLlamaData.lua
-ProfessionLlama.lua
+ProfessionLlamaData_Crafting.lua
+ProfessionLlamaData_Armor.lua
+ProfessionLlamaData_Secondary.lua
+ProfessionLlamaData_Gathering.lua
+ProfessionLlamaCore.lua
+ProfessionLlamaWidgets.lua
+ProfessionLlamaRefresh.lua
+ProfessionLlamaFrame.lua
