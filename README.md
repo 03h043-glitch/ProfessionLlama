@@ -6,6 +6,7 @@ It gives you:
 
 - A movable GUI opened with `/pl` or `/professionllama`.
 - Navigation for every Classic profession: Alchemy, Blacksmithing, Cooking, Enchanting, Engineering, First Aid, Fishing, Herbalism, Leatherworking, Mining, Skinning, and Tailoring.
+- Learned professions are shown first in the profession list and highlighted in gold.
 - Search across professions, recipes, materials, notes, and gathering zones.
 - Step-by-step leveling ranges from 1 to 300.
 - Materials, recipe source notes, route tips, and profession shopping lists.
@@ -27,4 +28,4 @@ It gives you:
 - `/pl alchemy` opens a profession directly. Replace `alchemy` with any profession name.
 - `/pl reset` clears completed steps.
 
-The route data is intended as a fast, practical Classic leveling path. Auction House prices and recipe access can vary by realm, so the addon also shows alternatives where they are commonly useful.
+The route data follows the Classic profession guides from `https://www.wow-professions.com/classic`. Auction House prices and recipe access can vary by realm, so the addon also shows alternatives where the guides recommend them.
