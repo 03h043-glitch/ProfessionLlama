@@ -1,8 +1,8 @@
 ## Interface: 11508
 ## Title: Profession Llama
-## Notes: In-game WoW Classic profession leveling guide with fast paths, materials, and trainer notes.
+## Notes: In-game WoW Classic profession leveling guide using WoW-Professions Classic routes.
 ## Author: 03h043-glitch
-## Version: 0.1.0
+## Version: 0.2.0
 ## SavedVariables: ProfessionLlamaDB
 
 ProfessionLlamaData.lua

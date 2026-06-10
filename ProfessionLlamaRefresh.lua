@@ -58,8 +58,11 @@ end
 
 function PL.RefreshProfessions()
     local y, visible = 0, 0
-    for index, guide in ipairs(PL.guides) do
+    local guides = PL.SortedGuides()
+
+    for index, guide in ipairs(guides) do
         local guideKey = guide.key
+        local known = PL.GuideIsKnown(guide)
         local button = professionButtons[index] or PL.TextButton(PL.frame.professionChild, 30)
         professionButtons[index] = button
         if PL.GuideMatches(guide, PL.searchText or "") then
@@ -70,6 +73,11 @@ function PL.RefreshProfessions()
             button.text:SetText(guide.name)
             button:SetScript("OnClick", function() PL.SelectProfession(guideKey) end)
             PL.StyleButton(button, guideKey == PL.db.selectedProfession, false)
+            if known then
+                button.text:SetTextColor(1, 0.82, 0, 1)
+            else
+                button.text:SetTextColor(0.9, 0.9, 0.84, 1)
+            end
             button:Show()
             y = y + 34
         else

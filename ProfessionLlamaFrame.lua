@@ -154,6 +154,7 @@ function PL.Toggle()
     if PL.frame:IsShown() then
         PL.frame:Hide()
     else
+        PL.RefreshKnownProfessions()
         PL.frame:Show()
         PL.Refresh()
     end
@@ -175,6 +176,7 @@ local function slash(input)
             PL.db.selectedProfession = guide.key
             PL.db.selectedStep = 1
             PL.BuildFrame()
+            PL.RefreshKnownProfessions()
             PL.frame:Show()
             PL.Refresh()
             return
@@ -185,14 +187,26 @@ end
 
 local events = CreateFrame("Frame")
 events:RegisterEvent("ADDON_LOADED")
-events:SetScript("OnEvent", function(_, _, loadedAddon)
-    if loadedAddon ~= PL.addonName then
+events:SetScript("OnEvent", function(self, event, loadedAddon)
+    if event == "ADDON_LOADED" and loadedAddon ~= PL.addonName then
         return
     end
-    PL.InitDB()
-    PL.searchText = ""
-    SLASH_PROFESSIONLLAMA1 = "/pl"
-    SLASH_PROFESSIONLLAMA2 = "/professionllama"
-    SlashCmdList.PROFESSIONLLAMA = slash
-    PL.Print("loaded. Type /pl to open.")
+    if event == "ADDON_LOADED" then
+        PL.InitDB()
+        PL.searchText = ""
+        PL.RefreshKnownProfessions()
+        self:RegisterEvent("PLAYER_ENTERING_WORLD")
+        self:RegisterEvent("SKILL_LINES_CHANGED")
+        self:RegisterEvent("TRADE_SKILL_UPDATE")
+        SLASH_PROFESSIONLLAMA1 = "/pl"
+        SLASH_PROFESSIONLLAMA2 = "/professionllama"
+        SlashCmdList.PROFESSIONLLAMA = slash
+        PL.Print("loaded. Type /pl to open.")
+        return
+    end
+
+    PL.RefreshKnownProfessions()
+    if PL.frame and PL.frame:IsShown() then
+        PL.Refresh()
+    end
 end)

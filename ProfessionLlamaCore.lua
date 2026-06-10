@@ -79,6 +79,59 @@ function PL.SelectedGuide()
     return PL.FindGuide(PL.db and PL.db.selectedProfession)
 end
 
+PL.knownProfessions = {}
+
+function PL.RefreshKnownProfessions()
+    PL.knownProfessions = {}
+
+    if not GetProfessions or not GetProfessionInfo then
+        return
+    end
+
+    local function addProfession(index)
+        if not index then
+            return
+        end
+        local name = GetProfessionInfo(index)
+        if name then
+            PL.knownProfessions[PL.Normalize(name)] = true
+        end
+    end
+
+    local profession1, profession2, archaeology, fishing, cooking, firstAid = GetProfessions()
+    addProfession(profession1)
+    addProfession(profession2)
+    addProfession(archaeology)
+    addProfession(fishing)
+    addProfession(cooking)
+    addProfession(firstAid)
+end
+
+function PL.GuideIsKnown(guide)
+    return guide and PL.knownProfessions[PL.Normalize(guide.name)] == true
+end
+
+function PL.SortedGuides()
+    local known, unknown = {}, {}
+
+    for _, guide in ipairs(PL.guides) do
+        if PL.GuideIsKnown(guide) then
+            table.insert(known, guide)
+        else
+            table.insert(unknown, guide)
+        end
+    end
+
+    local sorted = {}
+    for _, guide in ipairs(known) do
+        table.insert(sorted, guide)
+    end
+    for _, guide in ipairs(unknown) do
+        table.insert(sorted, guide)
+    end
+    return sorted
+end
+
 function PL.StepFields(step)
     return step[1], step[2], step[3], step[4], step[5]
 end
